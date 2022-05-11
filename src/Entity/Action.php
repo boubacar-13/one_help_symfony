@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping\DiscriminatorMap;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ActionRepository::class)]
 #[ORM\HasLifecycleCallbacks]
@@ -25,6 +26,8 @@ abstract class Action
 
     #[ORM\ManyToOne(targetEntity: Personne::class, inversedBy: 'relation')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Assert\NotBlank(message: "Veuillez remplir ce champs")] // CONTROLE DE SAISIE NOT BLANK
+    #[Assert\Length(min: 3)] // CONTROLE DE SAISIE TAILLE
     private $personne;
 
     #[ORM\ManyToMany(targetEntity: Benevole::class, mappedBy: 'actions')]

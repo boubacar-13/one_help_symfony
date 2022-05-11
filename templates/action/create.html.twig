@@ -3,8 +3,13 @@
 {% block title 'Nouvelle Action' %}
 
 {% block body %}
-  <h1>Créer une action</h1>
+  <div class="row">
+    <div class="col-md-6 mx-auto">
+      <h1>Créer une action</h1>
+  
+      {{ include('action/_form.html.twig')}}
+    </div>
+  </div>
 
-{{ include('action/_form.html.twig')}}
 
 {% endblock %}  

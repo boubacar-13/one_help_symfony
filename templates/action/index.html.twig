@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'layouts/base.html.twig' %}
 
 {% block title 'One Help - Actions' %}
 
@@ -10,6 +10,10 @@
   <h2><a href="{{ path('app_action_show', {id: action.id}) }}">{{action.adresseMaraude}}</a></h2>
   <p>{{action.adresseMaraude}}</p>
   <p>{{action.villeMaraude}}</p>
+  {# <p>{{action.villeMaraude|u.truncate(10, '...', false)}}</p> 
+  pour réduire nb caractère  #}
+  <p>Submitted {{action.createdAt|ago}}</p>
+
 </article>
 {% endfor %}
 {% endblock %}

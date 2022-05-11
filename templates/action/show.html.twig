@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'layouts/base.html.twig' %}
 
 {% block title action.id %}
 
@@ -13,6 +13,7 @@
   <a href="{{ path('app_home') }}">Retour</a>
   
   <form id="js-maraude-delete-form" action="{{ path('app_delete', {id: pin.id}) }}" method="post" style="display: none;">
+    <input type="hidden" name="csrf_token" value=" {{ csrf_token('maraude_deletion_' ~ maraude.id)}} ">
     <input type="hidden" name="_method" method="DELETE">
   </form>
 {% endblock %}

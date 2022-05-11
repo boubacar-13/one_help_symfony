@@ -1,13 +1,10 @@
-{% extends 'base.html.twig' %}
+{% extends 'layouts/base.html.twig' %}
 
 {% block title 'Nouvelle Action' %}
 
 {% block body %}
   <h1>Créer une action</h1>
 
-  {{ form_start(myForm) }}
-    {{ form_widget(myForm) }}
+{{ include('action/_form.html.twig')}}
 
-    <input type="submit" value="Créer action" formnovalidate>
-  {{ form_end(myForm) }}
-{% endblock %}
+{% endblock %}  

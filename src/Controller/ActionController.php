@@ -49,6 +49,8 @@ class ActionController extends AbstractController
             $em->persist($maraude);
             $em->flush();
 
+            $this->addFlash('success', 'Action créée avec succès');
+
             return $this->redirectToRoute('app_home');
         }
 
@@ -75,6 +77,8 @@ class ActionController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $em->flush();
 
+            $this->addFlash('success', 'Action modifiée avec succès');
+
             return $this->redirectToRoute('app_home');
         }
 
@@ -83,11 +87,14 @@ class ActionController extends AbstractController
         ]);
     }
 
-    #[Route('/action/{id<[0-9]+/delete>}', name: 'app_action_delete', methods: "DELETE")]
-    public function delete(EntityManagerInterface $em, Maraude $maraude)
+    #[Route('/action/{id<[0-9]+>}', name: 'app_action_delete', methods: "DELETE")]
+    public function delete(Request $request, EntityManagerInterface $em, Maraude $maraude)
     {
-        $em->remove($maraude);
-        $em->flush();
+        if ($this->isCsrfTokenValid('maraude_deletion_' . $maraude->getId(), $request->request->get('csrf_token'))) {
+            $em->remove($maraude);
+            $em->flush();
+            $this->addFlash('info', 'Action supprimée avec succès');
+        }
 
         return $this->redirectToRoute('app_home');
     }
